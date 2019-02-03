@@ -1,0 +1,224 @@
+/**
+ * OWASP AppSensor
+ * 
+ * This file is part of the Open Web Application Security Project (OWASP)
+ * AppSensor project. For details, please see
+ * <a href="http://www.owasp.org/index.php/Category:OWASP_AppSensor_Project">
+ * 	http://www.owasp.org/index.php/Category:OWASP_AppSensor_Project</a>.
+ *
+ * Copyright (c) 2010 - The OWASP Foundation
+ * 
+ * AppSensor is published by OWASP under the BSD license. You should read and accept the
+ * LICENSE before you use, modify, and/or redistribute this software.
+ * 
+ * @author John Melton <a href="http://www.jtmelton.com/">jtmelton</a>
+ * @created 2010
+ */
+package org.owasp.appsensor.demoapp.hsqldb;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.owasp.appsensor.AppSensorIntrusion;
+import org.owasp.appsensor.DateUtils;
+import org.owasp.appsensor.intrusiondetection.IntrusionRecord;
+
+/**
+ * This class represents the collection of intrusions for a specific user.
+ * These records are managed by and housed in the intrusion store.  
+ * <p>
+ * The essential ways of interacting with this class once it is created
+ * are to add intrusions and violations as events/attacks occur and to 
+ * query this class for information about intrusions and violations 
+ * that have occurred. 
+ * <p>
+ * This example is NOT optimized.  There is no caching and optimal 
+ * performance was not a key design issue.  The goal was simply to 
+ * provide a working example of a DB driven implementation.
+ * 
+ * @author John Melton (jtmelton .at. gmail.com)
+ *         <a href="http://www.jtmelton.com/">jtmelton</a>
+ * @since September 16, 2010
+ */
+public class HsqldbIntrusionRecord implements IntrusionRecord, Serializable  {
+
+	/**
+	 * Serial Version ID for serialization
+	 */
+	private static final long serialVersionUID = -1505440116582543167L;
+
+	/** User this record is for */
+	private String userID;
+	
+	/** Most recent violation */
+	private String lastViolation = null;
+	
+	/** Most recent response */
+	private String DEFAULT_LAST_RESPONSE_ACTION = "NONE";
+	
+	/**
+	 * Constructor to create record for specified user
+	 * @param userID userId to create intrusion record for
+	 */
+	public HsqldbIntrusionRecord(String userID) {
+		this.userID = userID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addIntrusionToRecord(AppSensorIntrusion aie) {
+		HsqldbManager manager = new HsqldbManager();
+		manager.addIntrusionForUser(userID, aie);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getNumberOfAllIntrusions() {
+		return getNumberOfIntrusions(ALL_INTRUSIONS);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getNumberOfIntrusions(String eventCode) {
+		int defaultValue = 0;
+		int count = 0;
+
+		//if the code is for total - just get number for all intrusions
+		if ((ALL_INTRUSIONS).equalsIgnoreCase(eventCode)) {
+			HsqldbManager manager = new HsqldbManager();
+			Collection<AppSensorIntrusion> intrusionsCommitted = manager.getAllIntrusionsForUser(getUserID());
+			count = intrusionsCommitted.size();
+		} else {
+			HsqldbManager manager = new HsqldbManager();
+			Collection<AppSensorIntrusion> intrusionsCommitted = manager.getIntrusionsForUserByEventCode(getUserID(), eventCode);
+			count = intrusionsCommitted.size();
+		}
+		if (count < defaultValue) {
+			// Avoid the rare integer overflow scenario
+			count = Integer.MAX_VALUE;
+		}
+		return count;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getUserID() {
+		return this.userID;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void addViolation(String eventCode) {
+		HsqldbManager manager = new HsqldbManager();
+		manager.insertLastViolation(getUserID(), eventCode);
+		lastViolation = eventCode;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getLastViolation() {
+		HsqldbManager manager = new HsqldbManager();
+		lastViolation = manager.retrieveLastViolation(getUserID());
+		return lastViolation;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public void setLastResponseAction(String lastResponseAction, String eventCode) {
+		//create default list to use in case there's not one in the map
+		LinkedList<String> lastResponses = new LinkedList<String>();
+		
+		HsqldbManager manager = new HsqldbManager();
+		Map<String, LinkedList<String>> lastResponseActionMap = manager.retrieveLastResponseActionMapForUser(getUserID()); 
+		if (lastResponseActionMap.containsKey(eventCode)) {
+			//search for the specified event code
+			for (String ec : lastResponseActionMap.keySet()) {
+				if (ec != null && ec.equals(eventCode)) {
+					//use map list if available - already has contents
+					lastResponses = lastResponseActionMap.get(eventCode);
+					//update map with most recent response action
+					lastResponses.add(lastResponseAction);
+				}
+			}
+		} else {
+			//there's no existing record, starting from scratch
+			//add response
+			lastResponses.add(lastResponseAction);
+			//add to map
+			lastResponseActionMap.put(eventCode, lastResponses);
+		}
+		//need to save out lra map
+		manager.insertLastResponseActionMap(getUserID(), lastResponseActionMap);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public String getLastResponseAction(String eventCode) {
+		//use default in case last response doesn't exist yet
+		String lastResponse = DEFAULT_LAST_RESPONSE_ACTION;
+		
+		//checking if code exists in map
+		HsqldbManager manager = new HsqldbManager();
+		Map<String, LinkedList<String>> lastResponseActionMap = manager.retrieveLastResponseActionMapForUser(getUserID()); 
+		if (lastResponseActionMap.containsKey(eventCode)) {
+			//search for the specified event code
+			for (String ec : lastResponseActionMap.keySet()) {
+				if (ec != null && ec.equals(eventCode)) {
+					LinkedList<String> lastResponses = lastResponseActionMap.get(eventCode);
+					//return last response
+					lastResponse = lastResponses.getLast();
+				}
+			}
+		} 
+		return lastResponse;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public int getNumberOfIntrusionsInInterval(String eventCode, Long intervalInSeconds) {
+		//set the begin time for considering events to the current time minus the specified time interval in seconds
+		long beginTime = DateUtils.getTimeNumberOfSecondsAgo(intervalInSeconds);
+		
+		int count = 0;
+
+		//loop through intrusions incrementing count as we find matches
+		HsqldbManager manager = new HsqldbManager();
+		Collection<AppSensorIntrusion> intrusionsCommitted = manager.getAllIntrusionsForUser(getUserID());
+		for (AppSensorIntrusion asi : intrusionsCommitted) {
+			Long airEventTime = asi.getTimeStamp();
+			if (airEventTime > beginTime) {
+				if (eventCode.equalsIgnoreCase(ALL_INTRUSIONS) || asi.getEventCode().equalsIgnoreCase(eventCode)) {
+					//increment if we're considering either all intrusions or if we find the specific one we're looking for
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<AppSensorIntrusion> getCopyIntrusionsObserved() {
+		HsqldbManager manager = new HsqldbManager();
+		Collection<AppSensorIntrusion> intrusionsCommitted = manager.getAllIntrusionsForUser(getUserID());
+		List<AppSensorIntrusion> asiCopy = new ArrayList<AppSensorIntrusion>();
+		for (AppSensorIntrusion asi : intrusionsCommitted) {
+			asiCopy.add(asi);
+		}
+		return asiCopy;
+	}
+} 

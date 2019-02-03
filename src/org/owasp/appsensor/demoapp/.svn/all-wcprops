@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/126/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp
+END
+ASDemoASUtilities.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/50/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/ASDemoASUtilities.java
+END
+ASDemoASUserAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/118/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/ASDemoASUserAdapter.java
+END
+ASSecurityWrapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/101/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/ASSecurityWrapper.java
+END
+Base64Coder.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/Base64Coder.java
+END
+UpdateProfile.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/UpdateProfile.java
+END
+AppSensorDummyESAPIAuthenticator.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorDummyESAPIAuthenticator.java
+END
+Utility.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/100/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/Utility.java
+END
+ASSecurityWrapperRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/101/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/ASSecurityWrapperRequest.java
+END
+DemoUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/DemoUtils.java
+END
+AuthFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AuthFilter.java
+END
+Login.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/103/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/Login.java
+END
+AppSensorResponseAgent.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorResponseAgent.java
+END
+UserManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/13/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/UserManager.java
+END
+AppSensorUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorUser.java
+END
+AppSensorLogger.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorLogger.java
+END
+ASSecurityWrapperResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/118/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/ASSecurityWrapperResponse.java
+END
+AppSensorDetectionFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorDetectionFilter.java
+END
+AppSensorLoggerFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/63/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/AppSensorLoggerFilter.java
+END
+Message.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/10/trunk/AppSensorDemo2/src/org/owasp/appsensor/demoapp/Message.java
+END

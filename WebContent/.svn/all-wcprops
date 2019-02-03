@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/124/trunk/AppSensorDemo2/WebContent
+END
+friendRequests.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/friendRequests.jsp
+END
+updateProfile.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/updateProfile.jsp
+END
+search.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/search.jsp
+END
+404.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/404.jsp
+END
+login.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/login.jsp
+END
+logout.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/logout.jsp
+END
+addFriend.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/addFriend.jsp
+END
+header.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/header.jsp
+END
+home.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/home.jsp
+END
+error.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/error.jsp
+END
+friends.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/friends.jsp
+END
+viewProfile.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/viewProfile.jsp
+END
+appsensor_locked.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/appsensor_locked.jsp
+END
+header_unauthenticated.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/header_unauthenticated.jsp
+END
+footer.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/89/trunk/AppSensorDemo2/WebContent/footer.jsp
+END
+pendingFriends.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/10/trunk/AppSensorDemo2/WebContent/pendingFriends.jsp
+END
